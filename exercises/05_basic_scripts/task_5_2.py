@@ -30,3 +30,28 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+ip = input("Введи адрес сети: ")
+
+splitted_ip = ip.split("/")
+mask = int(splitted_ip[-1])
+octets = splitted_ip[0].split(".")
+
+network = """
+Network:
+{0:<10}{1:<10}{2:<10}{3:<10}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}"""
+
+print(network.format(int(octets[0]), int(octets[1]), int(octets[2]), int(octets[3])))
+
+binbask = str("1" * mask) + str("0" * (32 - mask))
+
+maskheader = """
+Mask:
+/{}"""
+
+masktempl = """
+{0:<10d}{1:<10d}{2:<10d}{3:<10d}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}"""
+
+print(maskheader.format(mask),masktempl.format((int(binbask[0:8],2)), int(binbask[8:16],2), int(binbask[16:24],2), int(binbask[24:32],2)))

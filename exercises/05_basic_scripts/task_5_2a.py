@@ -49,3 +49,35 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+ip = input("Введити адрес: ")
+
+address, mask_str = ip.split("/")
+
+address_split = address.split(".")
+
+mask = int(mask_str)
+
+binmask = str("1" * int(mask_str)) + str("0" * (32 - int(mask_str)))
+
+addrtmpl = '''{0:8b}{1:8b}{2:8b}{3:8b}'''
+
+binaddress = (addrtmpl.format(int(address_split[0]), int(address_split[1]), int(address_split[2]), int(address_split[3])))
+
+binaddress = binaddress[:mask] + "0" * (32 - mask)
+
+
+nettmpl = '''
+Network:
+{0:<8d}  {1:<8d}  {2:<8d}  {3:<8d}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}'''
+
+masktmpl = '''
+Mask:
+/{0}
+{1:<8d}  {2:<8d}  {3:<8d}  {4:<8d}
+{1:08b}  {2:08b}  {3:08b}  {4:08b}
+'''
+
+print(nettmpl.format(int(binaddress[0:8],2), int(binaddress[8:16],2), int(binaddress[16:24],2), int(binaddress[24:32],2)))
+print(masktmpl.format(mask, int(binmask[0:8],2), int(binmask[8:16],2), int(binmask[16:24],2), int(binmask[24:32],2)))
