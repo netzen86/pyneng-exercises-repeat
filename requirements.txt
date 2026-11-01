@@ -1,5 +1,12 @@
-pytest==6.2.3
-yaml==6.0
+pytest
+PyYAML
 netmiko
 pexpect
 paramiko
+setuptools<85.0.0
+click
+pytest-json-report
+jinja2
+pytest-clarity
+six
+importlib_metadata
